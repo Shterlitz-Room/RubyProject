@@ -1,0 +1,69 @@
+<% content_for :title, "Каталог — Магазин" %>
+
+<h1 style="margin-top:0;">Распродажа</h1>
+
+<div class="catalog-toolbar">
+  <div class="filter-wrap" tabindex="0">
+    <button type="button" class="filter-btn">Фильтр</button>
+    <div class="filter-panel">
+      <%= link_to "Все категории", catalog_path(@query.except(:category)) %>
+      <% Product::CATEGORIES.each do |slug, label| %>
+        <%= link_to label, catalog_path(@query.merge(category: slug)) %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= form_with url: catalog_path, method: :get, local: true do %>
+    <% @query.except(:gender).each do |k, v| %>
+      <%= hidden_field_tag k, v if v.present? %>
+    <% end %>
+    <label>
+      Пол:
+      <%= select_tag :gender,
+          options_for_select(
+            [ [ "Все", "all" ], [ "М", "male" ], [ "Ж", "female" ] ],
+            @query[:gender].presence || "all"
+          ),
+          class: "toolbar-select",
+          onchange: "this.form.submit()" %>
+    </label>
+  <% end %>
+
+  <%= form_with url: catalog_path, method: :get, local: true do %>
+    <% @query.except(:sort).each do |k, v| %>
+      <%= hidden_field_tag k, v if v.present? %>
+    <% end %>
+    <label>
+      Сортировка:
+      <%= select_tag :sort,
+          options_for_select(
+            [
+              [ "По умолчанию", "" ],
+              [ "Сначала дешевле", "price_asc" ],
+              [ "Сначала дороже", "price_desc" ]
+            ],
+            @query[:sort]
+          ),
+          class: "toolbar-select",
+          onchange: "this.form.submit()" %>
+    </label>
+  <% end %>
+
+  <%= link_to "Обновить ленту", catalog_path, class: "btn-primary" %>
+</div>
+
+<div class="product-grid">
+  <% @products.each do |product| %>
+    <%= render "catalog/product_card", product: product, query: @query %>
+  <% end %>
+</div>
+
+<% if @products.empty? %>
+  <p>Товаров не найдено.</p>
+<% end %>
+
+<div class="refresh-row">
+  <%= link_to "↻ Обновить ленту", catalog_path, class: "btn-primary" %>
+</div>
+
+<%= turbo_frame_tag "product_modal" %>

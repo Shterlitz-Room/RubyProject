@@ -1,0 +1,37 @@
+<%= turbo_frame_tag "product_modal" do %>
+  <div class="modal-backdrop">
+    <div class="modal-panel">
+      <%= link_to "×", catalog_path(@catalog_params), class: "modal-close", data: { turbo_frame: "product_modal" } %>
+      <div class="modal-panel__image">
+        <% if @product.image.attached? %>
+          <%= active_storage_image_tag @product.image, resize_to_limit: [ 500, 500 ], alt: @product.name %>
+        <% else %>
+          <%= image_tag "https://placehold.co/500x500/ddd/333?text=#{CGI.escape(@product.name)}", alt: @product.name %>
+        <% end %>
+      </div>
+      <div>
+        <h2 style="margin-top:0;"><%= @product.name %></h2>
+        <p><%= simple_format(@product.description.presence || "Описание появится позже.") %></p>
+        <div class="size-buttons">
+          <% @product.sizes.each do |sz| %>
+            <span><%= sz %></span>
+          <% end %>
+        </div>
+        <div class="modal-price-block">
+          <% if @product.on_sale? %>
+            <% pct = @product.discount_percent %>
+            <div>
+              <span class="modal-price-big"><%= @product.display_price %> ₽</span>
+              <% if pct.positive? %>
+                <span class="discount-tag">-<%= pct %>%</span>
+              <% end %>
+            </div>
+            <p style="margin:0.5rem 0 0;font-size:0.9rem;">Без скидки: <%= format("%.0f", @product.compare_at_price) %> ₽</p>
+          <% else %>
+            <span class="modal-price-big"><%= @product.display_price %> ₽</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

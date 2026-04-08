@@ -1,0 +1,22 @@
+<% content_for :title, "Вход — Магазин" %>
+
+<div class="form-panel">
+  <h1>Вход</h1>
+
+  <%= form_with url: login_path do |f| %>
+    <div>
+      <%= label_tag :email, "Email" %>
+      <%= email_field_tag :email, params[:email], autocomplete: "email" %>
+    </div>
+    <div style="margin-top:1rem;">
+      <%= label_tag :password, "Пароль" %>
+      <%= password_field_tag :password, nil, autocomplete: "current-password" %>
+    </div>
+    <p style="margin-top:1.25rem;">
+      <%= link_to "Нет аккаунта? Регистрация", register_path %>
+    </p>
+    <p style="margin-top:1rem;">
+      <%= submit_tag "Войти", class: "btn-primary", style: "width:100%;" %>
+    </p>
+  <% end %>
+</div>

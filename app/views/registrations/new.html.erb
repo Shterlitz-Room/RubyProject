@@ -1,0 +1,45 @@
+<% content_for :title, "Регистрация — Магазин" %>
+
+<div class="form-panel">
+  <h1>Регистрация</h1>
+
+  <%= form_with model: @user, url: register_path do |f| %>
+    <div>
+      <%= f.label :email, "Email" %>
+      <%= f.email_field :email, autocomplete: "email" %>
+      <% @user.errors.full_messages_for(:email).each do |msg| %>
+        <div class="form-error"><%= msg %></div>
+      <% end %>
+    </div>
+
+    <div data-controller="password-toggle">
+      <%= f.label :password, "Пароль" %>
+      <div class="password-row">
+        <%= f.password_field :password, autocomplete: "new-password", data: { password_toggle_target: "input" } %>
+        <button type="button" class="toggle-visibility" data-action="click->password-toggle#toggle" aria-label="Показать пароль">👁</button>
+      </div>
+      <% @user.errors.full_messages_for(:password).each do |msg| %>
+        <div class="form-error"><%= msg %></div>
+      <% end %>
+    </div>
+
+    <div data-controller="password-toggle">
+      <%= f.label :password_confirmation, "Подтверждение пароля" %>
+      <div class="password-row">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", data: { password_toggle_target: "input" } %>
+        <button type="button" class="toggle-visibility" data-action="click->password-toggle#toggle" aria-label="Показать пароль">👁</button>
+      </div>
+      <% @user.errors.full_messages_for(:password_confirmation).each do |msg| %>
+        <div class="form-error"><%= msg %></div>
+      <% end %>
+    </div>
+
+    <p style="margin-top:1.25rem;">
+      <%= link_to "Уже есть аккаунт? Войти", login_path %>
+    </p>
+
+    <p style="margin-top:1rem;">
+      <%= f.submit "Зарегистрироваться", class: "btn-secondary", style: "width:100%;" %>
+    </p>
+  <% end %>
+</div>

@@ -1,0 +1,37 @@
+<% content_for :title, "О нас — Магазин" %>
+
+<section class="promo-box">
+  <strong>Акции и предложения:</strong> скидки на распродаже, бесплатная примерка при заказе от 5000 ₽, подарочный сертификат при покупке двух вещей.
+</section>
+
+<div class="landing-hero">
+  <%= link_to "Начать покупки", catalog_path, class: "btn-primary" %>
+</div>
+
+<section class="landing-section">
+  <h2>О бренде</h2>
+  <p>Мы шьём одежду из натуральных тканей и следим за посадкой. Наша цель — вещи на каждый день, которые долго носятся и не устаревают за сезон.</p>
+  <ul>
+    <li>натуральные ткани и аккуратный крой;</li>
+    <li>прозрачные условия возврата;</li>
+    <li>собственное производство и контроль качества.</li>
+  </ul>
+</section>
+
+<section class="landing-section">
+  <h2>Как мы работаем</h2>
+  <div class="landing-gallery">
+    <figure>
+      <%= image_tag "https://placehold.co/400x240/2d2d2d/f5f0e6?text=Фабрика", alt: "Производство" %>
+      <figcaption>Наша фабрика — современное оборудование и проверенные поставщики полотна.</figcaption>
+    </figure>
+    <figure>
+      <%= image_tag "https://placehold.co/400x240/2d2d2d/f5f0e6?text=Команда", alt: "Команда" %>
+      <figcaption>Наша команда — дизайнеры и технологи, которые носят то же, что и вы.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="landing-section">
+  <p>Больше фото и историй — в соцсетях внизу страницы.</p>
+</section>
