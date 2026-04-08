@@ -1,0 +1,17 @@
+one:
+  name: Fixture shirt
+  description: Test
+  price: 100
+  compare_at_price:
+  category: tshirt
+  gender: all
+  sizes: [ "S", "M", "L" ]
+
+two:
+  name: Fixture jeans
+  description: Test
+  price: 200
+  compare_at_price: 250
+  category: jeans
+  gender: male
+  sizes: [ "30", "32" ]

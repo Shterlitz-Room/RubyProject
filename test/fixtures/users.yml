@@ -1,0 +1,3 @@
+one:
+  email: fixture@test.com
+  password_digest: <%= BCrypt::Password.create("password12", cost: 4) %>
