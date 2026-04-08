@@ -1,0 +1,37 @@
+<header class="site-header" data-controller="mobile-menu">
+  <div class="site-header__inner">
+    <button type="button" class="site-header__burger" data-action="click->mobile-menu#toggle" aria-label="Меню">☰</button>
+    <select class="region-select" name="region" aria-label="Регион">
+      <option>Регион</option>
+      <option>Москва</option>
+      <option>СПб</option>
+      <option>Другой</option>
+    </select>
+    <%= link_to root_path, class: "site-logo" do %>
+      ЛОГОТИП МАГАЗИНА
+    <% end %>
+    <div class="site-header__nav-wrap" data-mobile-menu-target="panel">
+      <% if header_landing_style? %>
+        <ul class="header-links">
+          <li><%= link_to "Вход", login_path %></li>
+          <li><%= link_to "Регистрация", register_path %></li>
+        </ul>
+      <% else %>
+        <ul class="header-links">
+          <li>
+            <% if current_user %>
+              <%= link_to catalog_path, class: "icon-link", title: "Профиль" do %>⌂<% end %>
+            <% else %>
+              <%= link_to login_path, class: "icon-link", title: "Вход" do %>⌂<% end %>
+            <% end %>
+          </li>
+          <li><%= link_to catalog_path, class: "icon-link", title: "Корзина" do %>🛒<% end %></li>
+          <li><%= link_to "О нас", root_path %></li>
+          <% if current_user %>
+            <li><%= link_to "Выйти", logout_path, data: { turbo_method: :delete } %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</header>
