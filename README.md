@@ -21,3 +21,9 @@ docker compose exec web bin/rails console
 ```bash
 docker compose exec web bin/rails db:migrate
 ```
+
+Локально (без Docker):
+
+```bash
+bundle install && bin/rails db:migrate db:seed
+```
